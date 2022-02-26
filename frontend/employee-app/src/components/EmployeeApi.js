@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 
 class EmployeeApi extends Component
@@ -8,4 +8,56 @@ class EmployeeApi extends Component
         super(props);
         this.state = {employees:[]};
     }
+
+    componentDidMount()
+    {
+        fetch('/employees')
+        .then(response => response.json())
+        .then(data => this.setState({employees:data}));
+    }
+
+    render()
+    {
+        return (
+            <EmployeeList employees={this.state.employees}/>
+        )
+    }
 }
+
+class EmployeeList extends Component
+{
+    render()
+    {
+        const employees = this.props.employees.map(employee => <Employee key = {employee.id} employee = {employee}>
+        </Employee>);
+
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Description</th>
+                    </tr>
+                    {employees}
+                </tbody>
+            </table>
+        )
+    }
+}
+
+class Employee extends Component
+{
+    render()
+    {
+        return(
+            <tr>
+                <td>{this.props.employee.firstName}</td>
+                <td>{this.props.employee.lastName}</td>
+                <td>{this.props.employee.description}</td>
+            </tr>
+        )
+    }
+}
+
+export default EmployeeApi;
