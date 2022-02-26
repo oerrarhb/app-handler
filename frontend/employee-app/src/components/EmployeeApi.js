@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, ButtonGroup, Container, Table } from "reactstrap";
 
 
 class EmployeeApi extends Component
@@ -32,16 +33,19 @@ class EmployeeList extends Component
         </Employee>);
 
         return (
-            <table>
+            <div>
+            <h3>Employees</h3>
+            <Table className="mt-4">
                 <tbody>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Description</th>
+                        <th width = "30%">First Name</th>
+                        <th width = "30%">Last Name</th>
+                        <th width = "40%">Description</th>
                     </tr>
                     {employees}
                 </tbody>
-            </table>
+            </Table>
+            </div>
         )
     }
 }
